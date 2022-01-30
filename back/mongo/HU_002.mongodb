@@ -1,0 +1,11 @@
+// BD name
+const database = 'mt-c4-db';
+
+// The current database to use.
+use(database);
+
+// users collection
+collection = 'users';
+
+//HU_002 Autentificacion en el sistema con su correo y contraseña
+db.getCollection(collection).findOne({email: "john.snow@mail.com", password: "$2a$10$FEBywZh8u9M0Cec/0mWep.1kXrwKeiWDba6tdKvDfEBjyePJnDT7K"});

@@ -1,0 +1,65 @@
+const database = 'mt-c4-db';
+
+// The current database to use
+use(database);
+// advances collection
+collection = 'advances'
+
+// Drop advances collection
+db.getCollection(collection).drop();
+
+// Create advances collection
+db.createCollection(collection, {
+  validator: {
+    $jsonSchema: {
+      required: ['project_id', 'addDate', 'description', 'observations'],
+      properties: {
+        project_id: {
+          bsonType: 'objectId',
+        },
+        addDate: {
+          bsonType: 'date'
+        },
+        description: {
+          bsonType: 'string'
+        },
+        observations: {
+          bsonType: 'string'
+        }
+      }
+    }
+  }
+});
+
+const advances = [
+  {
+    "project_id": db.projects.findOne({name: 'Project 1'}, {_id: 1})._id,
+    "addDate": new Date(),
+    "description": 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl augue, ultrices non placerat maximus, feugiat nec mauris. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent posuere eros libero, eu hendrerit leo maximus congue. Aliquam accumsan tortor quis suscipit imperdiet. Pellentesque blandit augue lacus, at sollicitudin orci luctus sit amet. Donec et ornare leo. Fusce sollicitudin eros a nisi ullamcorper, porttitor eleifend massa luctus. Morbi luctus tellus dui, et commodo justo euismod eget.',
+    "observations": 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in dui et eros varius efficitur ut eget ex. Fusce faucibus dictum velit eget ultricies. Ut vitae efficitur ligula, nec interdum lacus. Phasellus id interdum neque. Fusce et velit id orci tempus maximus. Nam aliquam tincidunt tellus, eu condimentum sapien dictum sit amet. Aenean dictum volutpat facilisis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc sit amet orci non nisi pharetra fringilla.',
+  },
+  {
+    "project_id": db.projects.findOne({name: 'Project 2'}, {_id: 1})._id,
+    "addDate": new Date(),
+    "description": 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl augue, ultrices non placerat maximus, feugiat nec mauris. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent posuere eros libero, eu hendrerit leo maximus congue. Aliquam accumsan tortor quis suscipit imperdiet. Pellentesque blandit augue lacus, at sollicitudin orci luctus sit amet. Donec et ornare leo. Fusce sollicitudin eros a nisi ullamcorper, porttitor eleifend massa luctus. Morbi luctus tellus dui, et commodo justo euismod eget.',
+    "observations": 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in dui et eros varius efficitur ut eget ex. Fusce faucibus dictum velit eget ultricies. Ut vitae efficitur ligula, nec interdum lacus. Phasellus id interdum neque. Fusce et velit id orci tempus maximus. Nam aliquam tincidunt tellus, eu condimentum sapien dictum sit amet. Aenean dictum volutpat facilisis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc sit amet orci non nisi pharetra fringilla.',
+  },
+  {
+    "project_id": db.projects.findOne({name: 'Project 3'}, {_id: 1})._id,
+    "addDate": new Date(),
+    "description": 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl augue, ultrices non placerat maximus, feugiat nec mauris. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent posuere eros libero, eu hendrerit leo maximus congue. Aliquam accumsan tortor quis suscipit imperdiet. Pellentesque blandit augue lacus, at sollicitudin orci luctus sit amet. Donec et ornare leo. Fusce sollicitudin eros a nisi ullamcorper, porttitor eleifend massa luctus. Morbi luctus tellus dui, et commodo justo euismod eget.',
+    "observations": 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in dui et eros varius efficitur ut eget ex. Fusce faucibus dictum velit eget ultricies. Ut vitae efficitur ligula, nec interdum lacus. Phasellus id interdum neque. Fusce et velit id orci tempus maximus. Nam aliquam tincidunt tellus, eu condimentum sapien dictum sit amet. Aenean dictum volutpat facilisis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc sit amet orci non nisi pharetra fringilla.',
+  },
+  {
+    "project_id": db.projects.findOne({name: 'Project 4'}, {_id: 1})._id,
+    "addDate": new Date(),
+    "description": 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl augue, ultrices non placerat maximus, feugiat nec mauris. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent posuere eros libero, eu hendrerit leo maximus congue. Aliquam accumsan tortor quis suscipit imperdiet. Pellentesque blandit augue lacus, at sollicitudin orci luctus sit amet. Donec et ornare leo. Fusce sollicitudin eros a nisi ullamcorper, porttitor eleifend massa luctus. Morbi luctus tellus dui, et commodo justo euismod eget.',
+    "observations": 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in dui et eros varius efficitur ut eget ex. Fusce faucibus dictum velit eget ultricies. Ut vitae efficitur ligula, nec interdum lacus. Phasellus id interdum neque. Fusce et velit id orci tempus maximus. Nam aliquam tincidunt tellus, eu condimentum sapien dictum sit amet. Aenean dictum volutpat facilisis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc sit amet orci non nisi pharetra fringilla.',
+  }
+];
+
+// Insert advances
+db.getCollection(collection).insertMany(advances);
+
+
+

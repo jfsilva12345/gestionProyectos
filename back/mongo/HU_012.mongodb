@@ -1,0 +1,24 @@
+// BD name
+const database = 'mt-c4-db';
+
+// The current database to use.
+use(database);
+
+// Projects collection
+collection = 'projects';
+
+  const projects = [
+  {
+    "name": "Project40 ",
+    "generalObjective": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl augue, ultrices non placerat maximus, feugiat nec mauris.",
+    "specificObjectives": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit", "Praesent nisl augue, ultrices non placerat maximus, feugiat nec mauris."],
+    "budget": Decimal128('18000000'),
+    "startDate": new Date(),
+    "endDate": new Date(new Date().getTime() + 60*24*60*60000),
+    "leader_id": db.users.findOne({email: 'walter.white@mail.com'})._id,
+    "status": "inactive",
+  }]; 
+
+
+//HU_012 Crear un nuevo proyecto
+db.getCollection(collection).insertMany(projects);

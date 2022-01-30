@@ -1,0 +1,20 @@
+
+// BD name
+const database = 'mt-c4-db';
+
+// The current database to use.
+use(database);
+
+// Users collection
+collection = 'users';
+
+//HU_011 $Set de la historia 10
+db.getCollection(collection).update(
+//  {documentId: "//ID DEL ESTUDIANTE RECOGIDO EN LA HU_010"},
+{documentId: 1234567890},
+  {
+    $set: {
+    "status": "authorized"
+    }
+  }
+);

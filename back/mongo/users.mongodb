@@ -1,0 +1,120 @@
+// MongoDB Playground
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// BD name
+const database = 'mt-c4-db';
+
+// The current database to use.
+use(database);
+
+// users collection
+
+let collection = 'users';
+
+// Drop users collection
+db.getCollection(collection).drop();
+
+// Create a users collection schema
+db.createCollection(collection, {
+  validator: {
+    $jsonSchema: {
+      required: ['email', 'documentId', 'name', 'lastName', 'fullName', 'role', 'status'],
+      properties: {
+        email: {
+          bsonType: 'string',
+          pattern: '^[a-z0-9+_.-]+@[a-z0-9.-]+$'
+        },
+        documentId: {
+          bsonType: 'long',
+        },
+        name: {
+          bsonType: 'string'
+        },
+        lastName: {
+          bsonType: 'string'
+        },
+        fullName: {
+          bsonType: 'string'
+        },
+        role: {
+          enum: ["admin", "leader", "student"]
+        },
+        status: {
+          enum: ["pending", "authorized", "unauthorized"]
+        },
+        password: {
+          bsonType: 'string'
+        }
+      }
+    }
+  }
+});
+
+// Create unique index for email and documentId
+db.getCollection(collection).createIndex({ email: 1 }, { unique: true });
+db.getCollection(collection).createIndex({ documentId: 1 }, { unique: true });
+//HU_001 Creacion de usuarios (1/2)
+const users = [
+  {
+    "email": "tomas.anderson@mail.com",
+    "documentId": Long('1020345678'),
+    "name": "Tomas",
+    "lastName": "Anderson",
+    "fullName": "Tomas Anderson",
+    "role": "admin",
+    "status": "pending",
+    "password": "$2a$10$FEBywZh8u9M0Cec/0mWep.1kXrwKeiWDba6tdKvDfEBjyePJnDT7K"
+  },
+  {
+    "email": "peter.griffin@mail.com",
+    "documentId": Long('1234567890'),
+    "name": "Peter",
+    "lastName": "Griffin",
+    "fullName": "Peter Griffin",
+    "role": "student",
+    "status": "pending",
+    "password": "$2a$10$FEBywZh8u9M0Cec/0mWep.1kXrwKeiWDba6tdKvDfEBjyePJnDT7K"
+  },
+  {
+    "email": "walter.white@mail.com",
+    "documentId": Long('1025342546'),
+    "name": "Walter",
+    "lastName": "White",
+    "fullName": "Walter White",
+    "role": "leader",
+    "status": "pending",
+    "password": "$2a$10$FEBywZh8u9M0Cec/0mWep.1kXrwKeiWDba6tdKvDfEBjyePJnDT7K"
+  },
+  {
+    "email": "rick.sanchez@mail.com",
+    "documentId": Long('1021587653'),
+    "name": "Rick",
+    "lastName": "Sanchez",
+    "fullName": "Rick Sanchez",
+    "role": "student",
+    "status": "pending",
+    "password": "$2a$10$FEBywZh8u9M0Cec/0mWep.1kXrwKeiWDba6tdKvDfEBjyePJnDT7K"
+  },
+  {
+    "email": "john.snow@mail.com",
+    "documentId": Long('1022351234'),
+    "name": "John",
+    "lastName": "Snow",
+    "fullName": "John Snow",
+    "role": "leader",
+    "status": "pending",
+    "password": "$2a$10$FEBywZh8u9M0Cec/0mWep.1kXrwKeiWDba6tdKvDfEBjyePJnDT7K"
+  }
+];
+
+
+
+
+
+
+
+
+
+
+
+

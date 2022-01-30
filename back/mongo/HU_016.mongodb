@@ -1,0 +1,25 @@
+// BD name
+const database = 'mt-c4-db';
+// The current database to use.
+use(database);
+
+const collection = 'enrollments'
+
+// HU_016 
+// "Como líder
+// Dado que estoy viendo la lista de solicitudes de inscripción a los proyectos que lidero
+// Cuando requiera cambiar el estado a la solicitudes
+// Entonces podré aceptar o rechazar sus inscripciones"
+
+
+db.getCollection(collection).updateOne(
+  {user_id: db.users.findOne({documentId: 1234567890})._id},
+  {
+    $set: {
+    "status": "acepted"
+    }
+  }
+);
+
+
+

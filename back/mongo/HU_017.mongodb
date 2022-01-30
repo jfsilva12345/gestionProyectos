@@ -1,0 +1,35 @@
+// BD name
+const database = 'mt-c4-db';
+// The current database to use.
+use(database);
+
+const collection = 'projects'
+
+// HU_017 
+// Como líder
+// Dado que estoy viendo la lista de los proyectos que he registrado en la
+// plataforma
+// Cuando necesite realizar una revisión a uno de mis proyectos
+// Entonces podré listar la información relacionada al proyecto que deseo
+// revisar (Incluyendo los avances)."
+
+db.projects.aggregate([{
+    $lookup: {
+    from: 'advances',
+    localField: '_id',
+    foreignField: 'project_id',
+    as: 'avancesproyecto'
+    }}, {$unwind: {
+    path: '$avancesproyecto'
+    }}, {$addFields: {
+    fechaAvance: '$avancesproyecto.addDate',
+    descripcion: '$avancesproyecto.description'
+    }}, {$project: {
+    avancesproyecto: 0,
+    _id: 0,
+    leader_id: 0
+    }
+}])
+
+
+

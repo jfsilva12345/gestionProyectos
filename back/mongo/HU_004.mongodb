@@ -1,0 +1,11 @@
+// BD name
+const database = 'mt-c4-db';
+
+// The current database to use.
+use(database);
+
+// users collection
+collection = 'users';
+
+//HU_004 Lista de todos los usuario registrados
+db.getCollection(collection).find();

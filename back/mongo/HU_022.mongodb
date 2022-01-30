@@ -1,0 +1,21 @@
+// BD name
+const database = 'mt-c4-db';
+
+// The current database to use.
+use(database);
+
+// Advances collection
+collection = 'advances';
+
+const advances = [
+  {
+    "project_id": db.projects.findOne({name: 'Project Prueba'})._id,
+//"student_id": db.users.findOne({email: 'peter.griffin@mail.com'})._id,
+    "addDate": new Date(),
+    "description": 'Consectetur adipiscing elit. Prueba',
+    "observations": 'Consectetur adipiscing elit. Prueba',
+  }
+];  
+
+//HU_022 Registrar avances a un proyecto en el que estoy inscrito (Y este se encuentra en estado activo)
+db.getCollection(collection).insertMany(advances);

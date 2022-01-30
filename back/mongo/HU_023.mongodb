@@ -1,0 +1,19 @@
+// BD name
+const database = 'mt-c4-db';
+
+// The current database to use.
+use(database);
+
+// Advances collection
+collection = 'advances';
+
+//HU_023 Actualizar la información de un avance
+db.getCollection(collection).update(
+  {"project_id": db.projects.findOne({name: 'Project 2'}, {_id: 1})._id,},
+  {
+    $set: {
+  //description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl augue, ultrices non placerat maximus, feugiat nec mauris.",
+    description: "Lorem ipsum dolor sit amet",
+        }
+    }
+);

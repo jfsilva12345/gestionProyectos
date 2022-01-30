@@ -1,0 +1,24 @@
+// BD name
+const database = 'mt-c4-db';
+
+// The current database to use.
+use(database);
+
+// users collection
+collection = 'users';
+
+const users = [
+  {
+    "email": "tomasez.andersonez@mail.com",
+    "documentId": Long('1020345680'),
+    "name": "Tomasez",
+    "lastName": "Andersonez",
+    "fullName": "Tomasez Andersonez",
+    "role": "admin",
+    "status": "pending",
+    "password": "$2a$10$FEBywZh8u9M0Cec/0mWep.1kXrwKeiWDba6tdKvDfEBjyePJnDT7K"
+  }
+];
+
+//HU_001 Insercion de usuarios a la base de datos (2/2)
+db.getCollection(collection).insertMany(users);

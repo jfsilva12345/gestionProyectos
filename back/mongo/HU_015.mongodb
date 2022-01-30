@@ -1,0 +1,31 @@
+// BD name
+const database = 'mt-c4-db';
+// The current database to use.
+use(database);
+
+//HU_015 
+// "Como líder
+// Dado que ingresé al sistema de gestión de proyectos
+// Cuando requiera revisar las solicitudes pendientes por aceptar o rechazar de estudiantes de inscripción a mis proyectos
+// Entonces podré listar las solicitudes realizadas por los estudiantes"
+
+//falta filtrar solo líder
+
+db.enrollments.aggregate([{
+    $lookup: {
+        from: 'users',
+        localField: 'user_id',
+        foreignField: '_id',
+        as: 'userproy'
+    }}, {$unwind: {
+        path: '$userproy'
+    }}, {$addFields: {
+        documentId: '$userproy.documentId',
+        fullName: '$userproy.fullName',
+        role: '$userproy.role',
+        status: '$userproy.status'
+    }}, {$project: {
+        userproy: 0
+    }}]
+)
+

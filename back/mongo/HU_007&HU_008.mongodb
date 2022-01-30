@@ -1,0 +1,19 @@
+// BD name
+const database = 'mt-c4-db';
+
+// The current database to use.
+use(database);
+
+// users collection
+collection = 'projects';
+
+// HU_007 - HU_008 Actualizar el estado de un proyecto 
+db.getCollection(collection).update(
+  {name: "Project 4"},
+  {
+    $set: {
+    status: "active",
+    phase: "started"
+        }
+    }
+);

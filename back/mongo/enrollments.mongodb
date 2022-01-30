@@ -1,0 +1,65 @@
+// enrollments collection
+const database = 'mt-c4-db';
+
+// The current database to use.
+use(database);
+
+collection = 'enrollments';
+
+// Drop enrollments collection
+db.getCollection(collection).drop();
+
+db.createCollection(collection, {
+  validator: {
+    $jsonSchema: {
+      required: ['project_id', 'user_id'],
+      properties: {
+        project_id: {
+          bsonType: 'objectId',
+        },
+        user_id: {
+          bsonType: 'objectId'
+        },
+        status: {
+          enum: ['ACCEPTED', 'REJECTED']
+        },
+        enrollmentDate: {
+          bsonType: 'date'
+        },
+        egressDate: {
+          bsonType: 'date'
+        }
+      }
+    }
+  }
+});
+
+// Create unique index for project_id and user_id
+db.getCollection(collection).createIndex({ project_id: 1, user_id: 1 }, { unique: true, name: '_project_user_' });
+
+const enrollments = [
+  {
+    "project_id": db.projects.findOne({name: 'Project 1'}, {_id: 1})._id,
+    "user_id": db.users.findOne({email: 'peter.griffin@mail.com'}, {_id: 1})._id
+  },
+  {
+    "project_id": db.projects.findOne({name: 'Project 1'}, {_id: 1})._id,
+    "user_id": db.users.findOne({email: 'rick.sanchez@mail.com'})._id
+  },
+  {
+    "project_id": db.projects.findOne({name: 'Project 2'}, {_id: 1})._id,
+    "user_id": db.users.findOne({email: 'rick.sanchez@mail.com'})._id
+  },
+  {
+    "project_id": db.projects.findOne({name: 'Project 3'}, {_id: 1})._id,
+    "user_id": db.users.findOne({email: 'peter.griffin@mail.com'})._id
+  },
+  {
+    "project_id": db.projects.findOne({name: 'Project 4'}, {_id: 1})._id,
+    "user_id": db.users.findOne({email: 'rick.sanchez@mail.com'})._id
+  },
+];
+
+// Insert enrollments
+db.getCollection(collection).insertMany(enrollments);
+

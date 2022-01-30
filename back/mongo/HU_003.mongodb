@@ -1,0 +1,25 @@
+// BD name
+const database = 'mt-c4-db';
+
+// The current database to use.
+use(database);
+
+// users collection
+collection = 'users';
+
+//HU_003 Actualizacion de datos del usuario logueado
+db.getCollection(collection).update(
+  {email: "john.snow@mail.com", password: "$2a$10$FEBywZh8u9M0Cec/0mWep.1kXrwKeiWDba6tdKvDfEBjyePJnDT7K"},
+  {
+    $set: {
+    "email": "john.snow@mail.com",
+    "documentId": Long('1022351234'),
+    "name": "James",
+    "lastName": "Snow",
+    "fullName": "John Snow",
+    "role": "leader",
+    "status": "pending",
+    "password": "$2a$10$FEBywZh8u9M0Cec/0mWep.1kXrwKeiWDba6tdKvDfEBjyePJnDT7K"
+    }
+  }
+);
